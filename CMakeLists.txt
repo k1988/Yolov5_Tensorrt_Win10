@@ -4,9 +4,9 @@ project(yolov5)
 
 #change to your own path
 ##################################################
-set(OpenCV_DIR "G:\\c++\\paddle_test\\opencv\\build")  
-set(TRT_DIR "G:\\c++\\TensorRT-8.2.1.8")  
-set(Dirent_INCLUDE_DIRS "G:\\code\\yolov5-6.0\\tensorrt\\include")
+#set(OpenCV_DIR "G:\\c++\\paddle_test\\opencv\\build")  
+#set(TRT_DIR "G:\\c++\\TensorRT-8.2.1.8")  
+#set(Dirent_INCLUDE_DIRS "G:\\code\\yolov5-6.0\\tensorrt\\include")
 ##################################################
 
 add_definitions(-std=c++11)
@@ -27,7 +27,7 @@ include_directories(${Dirent_INCLUDE_DIRS})
 
 #change to your GPU own compute_XX
 ###########################################################################################
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-std=c++11;-g;-G;-gencode;arch=compute_75;code=sm_75)
+#set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-std=c++11;-g;-G;-gencode;arch=compute_51;code=sm_51)
 ###########################################################################################
 
 ####
@@ -60,9 +60,11 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS})
 link_directories(${TRT_DIR}\\lib)
 
-add_executable(yolov5 ${PROJECT_SOURCE_DIR}/yolov5.cpp ${PROJECT_SOURCE_DIR}/yololayer.cu ${PROJECT_SOURCE_DIR}/yololayer.h ${PROJECT_SOURCE_DIR}/preprocess.cu) 
+##add_executable(yolov5         ${PROJECT_SOURCE_DIR}/yolov5.cpp ${PROJECT_SOURCE_DIR}/yololayer.cu ${PROJECT_SOURCE_DIR}/yololayer.h ${PROJECT_SOURCE_DIR}/preprocess.cu) 
+cuda_add_library(yolov5 SHARED  ${PROJECT_SOURCE_DIR}/yolov5.cpp ${PROJECT_SOURCE_DIR}/yololayer.cu ${PROJECT_SOURCE_DIR}/yololayer.h ${PROJECT_SOURCE_DIR}/preprocess.cu)
 
 target_link_libraries(yolov5 "nvinfer" "nvinfer_plugin")  
 target_link_libraries(yolov5 ${OpenCV_LIBS})     
 target_link_libraries(yolov5 ${CUDA_LIBRARIES})  
 target_link_libraries(yolov5 Threads::Threads)     
+

@@ -1,0 +1,42 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "yolov5.exe",
+      "name": "yolov5.exe",
+      "args": [
+        "-s",
+        "..\\yolov5\\yolov5s.wts",
+        "..\\yolov5\\yolov5s.engine",
+        "s"
+      ],
+      "environment": [
+        {
+          "name": "path",
+          "value": "D:\\VC_INCLUDE\\opencv480\\opencv\\build\\x64\\vc16\\bin;%PATH%"
+        }
+      ],
+      "currentDir": "D:\\projects\\cuda\\Yolov5_Tensorrt_Win10"
+    },
+    {
+      "type": "default",
+      "exe": "D:\\Python39\\python.exe",
+      "project": "CMakeLists.txt",
+      "projectTarget": "yolov5.dll",
+      "name": "yolov5.dll",
+      "args": [
+        "python_trt.py"
+      ],
+      "environment": [
+        {
+          "name": "path",
+          "value": "D:\\VC_INCLUDE\\opencv480\\opencv\\build\\x64\\vc16\\bin;%PATH%"
+        }
+      ],
+      "currentDir": "D:\\projects\\cuda\\Yolov5_Tensorrt_Win10"
+    }
+  ]
+}

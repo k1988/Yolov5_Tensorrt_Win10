@@ -5,7 +5,7 @@ import numpy.ctypeslib as npct
 
 class Detector():
     def __init__(self,model_path,dll_path):
-        self.yolov5 = CDLL(dll_path)
+        self.yolov5 = CDLL(dll_path, winmode=0)
         self.yolov5.Detect.argtypes = [c_void_p,c_int,c_int,POINTER(c_ubyte),npct.ndpointer(dtype = np.float32, ndim = 2, shape = (50, 6), flags="C_CONTIGUOUS")]
         self.yolov5.Init.restype = c_void_p
         self.yolov5.Init.argtypes = [c_void_p]
@@ -31,7 +31,7 @@ def visualize(img,bbox_array):
         img = cv2.putText(img, "class:"+str(clas)+" "+str(round(score,2)), (int(temp[0]),int(temp[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (105, 237, 249), 1)
     return img
 
-det = Detector(model_path=b"./yolov5s.engine",dll_path="./yolov5.dll")  # b'' is needed
+det = Detector(model_path=b"../yolov5/yolov5s.engine",dll_path="./out/build/x64-Debug/yolov5.dll")  # b'' is needed
 img = cv2.imread("./pictures/zidane.jpg")
 result = det.predict(img)
 img = visualize(img,result)

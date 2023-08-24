@@ -1,0 +1,37 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "OpenCV_DIR",
+          "value": "D:\\VC_INCLUDE\\opencv480\\opencv\\build",
+          "type": "PATH"
+        },
+        {
+          "name": "CUDA_SDK_ROOT_DIR",
+          "value": "",
+          "type": "PATH"
+        },
+        {
+          "name": "TRT_DIR",
+          "value": "D:\\projects\\cuda\\TensorRT-8.4.0.6",
+          "type": "PATH"
+        },
+        {
+          "name": "CUDA_TOOLKIT_INCLUDE",
+          "value": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/include;D:/projects/cuda/TensorRT-8.4.0.6/include",
+          "type": "PATH"
+        }
+      ]
+    }
+  ]
+}

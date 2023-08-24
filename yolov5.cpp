@@ -10,6 +10,7 @@
 #include "macros.h"
 
 #define USE_FP16  // set USE_INT8 or USE_FP16 or USE_FP32
+//#define USE_INT8 // 1050 TI support int8£¬but what's coco_calib
 #define DEVICE 0  // GPU id
 #define NMS_THRESH 0.4
 #define CONF_THRESH 0.5
@@ -233,6 +234,10 @@ void APIToModel(unsigned int maxBatchSize, IHostMemory** modelStream, bool& is_p
     // Create builder
     IBuilder* builder = createInferBuilder(gLogger);
     IBuilderConfig* config = builder->createBuilderConfig();
+
+    std::cout << "Your platform support int8: " << (builder->platformHasFastInt8() ? "true" : "false") << std::endl;
+    std::cout << "Your platform support fp16: " << (builder->platformHasFastFp16() ? "true" : "false") << std::endl;
+    std::cout << "Your platform max batch size: " << (builder->getMaxBatchSize()) << std::endl;
 
     // Create model to populate the network, then set the outputs and create an engine
     ICudaEngine *engine = nullptr;

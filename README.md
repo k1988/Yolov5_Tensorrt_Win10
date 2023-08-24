@@ -1,4 +1,5 @@
 ## B站视频教程
+
 [https://www.bilibili.com/video/BV113411J7nk?p=1](https://www.bilibili.com/video/BV113411J7nk?p=1)
 
 ## 项目简介
@@ -41,7 +42,10 @@ git clone https://github.com/Monday-Leo/Yolov5_Tensorrt_Win10
 
 运行
 
-```
+```bash
+# 这一步需要先安装pytorch等环境
+pip3 install -r requirements.txt
+#pip3 install torch torchvision pandas yaml
 python gen_wts.py -w yolov5s.pt -o yolov5s.wts
 ```
 
@@ -78,12 +82,12 @@ python gen_wts.py -w yolov5s.pt -o yolov5s.wts
 ```
 cmake_minimum_required(VERSION 2.6)
 
-project(yolov5) 
+project(yolov5)
 
 #change to your own path
 ##################################################
-set(OpenCV_DIR "G:\\c++\\paddle_test\\opencv\\build")  
-set(TRT_DIR "G:\\c++\\TensorRT-8.2.1.8")  
+set(OpenCV_DIR "G:\\c++\\paddle_test\\opencv\\build")
+set(TRT_DIR "G:\\c++\\TensorRT-8.2.1.8")
 set(Dirent_INCLUDE_DIRS "C:\\Users\\LHY\\Desktop\\yolov5\\tensorrt\\include")
 ##################################################
 
@@ -101,7 +105,7 @@ find_package(CUDA REQUIRED)
 message(STATUS "    libraries: ${CUDA_LIBRARIES}")
 message(STATUS "    include path: ${CUDA_INCLUDE_DIRS}")
 include_directories(${CUDA_INCLUDE_DIRS})
-include_directories(${Dirent_INCLUDE_DIRS}) 
+include_directories(${Dirent_INCLUDE_DIRS})
 
 #change to your GPU own compute_XX
 ###########################################################################################
@@ -138,21 +142,19 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS})
 link_directories(${TRT_DIR}\\lib)
 
-add_executable(yolov5 ${PROJECT_SOURCE_DIR}/yolov5.cpp ${PROJECT_SOURCE_DIR}/yololayer.cu ${PROJECT_SOURCE_DIR}/yololayer.h ${PROJECT_SOURCE_DIR}/preprocess.cu) 
+add_executable(yolov5 ${PROJECT_SOURCE_DIR}/yolov5.cpp ${PROJECT_SOURCE_DIR}/yololayer.cu ${PROJECT_SOURCE_DIR}/yololayer.h ${PROJECT_SOURCE_DIR}/preprocess.cu)
 
-target_link_libraries(yolov5 "nvinfer" "nvinfer_plugin")  
-target_link_libraries(yolov5 ${OpenCV_LIBS})     
-target_link_libraries(yolov5 ${CUDA_LIBRARIES})  
-target_link_libraries(yolov5 Threads::Threads)     
+target_link_libraries(yolov5 "nvinfer" "nvinfer_plugin")
+target_link_libraries(yolov5 ${OpenCV_LIBS})
+target_link_libraries(yolov5 ${CUDA_LIBRARIES})
+target_link_libraries(yolov5 Threads::Threads)
 ```
 
 ### Cmake过程
 
 在本仓库目录下新建一个**build**文件夹
 
-<div align="center">
-<img src="assets/4.png" width="800">
-</div>
+![assets/4.png](assets/4.png)
 打开Cmake,选择本仓库目录，以及新建的**build**目录，再点击左下方**configure**按钮。
 
 <div align="center">
@@ -264,5 +266,4 @@ img = cv2.imread("./pictures/zidane.jpg")
 
 ## 参考资料
 
-https://github.com/wang-xinyu/tensorrtx/tree/master/yolov5
-
+<https://github.com/wang-xinyu/tensorrtx/tree/master/yolov5>
